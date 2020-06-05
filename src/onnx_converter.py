@@ -36,6 +36,11 @@ class ONNXConverterTF(object):
             os.makedirs(saved_path)
         unoptimized_model_saved_path = os.path.join(saved_path, '{}.onnx'.format(model_name))
         optimized_model_saved_path = os.path.join(saved_path, '{}_optimized.onnx'.format(model_name))
+        # todo: enningxie
+        # tmp_batch_text_pairs = [("一二三四五一二三四五一二三四五一二三四五", "一二三四五六")] + \
+        #                        [("一二三四五", "一二三四五")] * 99
+        # self.sample_inputs = self.tokenizer.batch_encode_plus(tmp_batch_text_pairs, return_tensors='tf',
+        #                                                       pad_to_max_length=True)
         self.sample_inputs = self.tokenizer.encode_plus("This is a sample input", return_tensors='tf')
         # Step 1: Convert origin transformers model to unoptimized ONNX model.
         model.predict(self.sample_inputs.data)
